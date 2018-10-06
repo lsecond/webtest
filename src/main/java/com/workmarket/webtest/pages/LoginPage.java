@@ -1,9 +1,10 @@
 package com.workmarket.webtest.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage {
+public class LoginPage extends AbstractPage{
 
     @FindBy(id = "login-email")
     private WebElement emailAddressField;
@@ -14,15 +15,22 @@ public class LoginPage {
     @FindBy(id = "login_page_button")
     private WebElement loginButton;
 
-    public void inputEmail(String email) {
-       emailAddressField.sendKeys(email);
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
 
-    public void inputPassword(String password){
-        passwordField.sendKeys(password);
+    public boolean inputEmail(String email) {
+        log.info(String.format("Input email: %s", email));
+        return sendKeys(emailAddressField, email);
     }
 
-    public void clickLogin() {
-        loginButton.click();
+    public boolean inputPassword(String password){
+        log.info(String.format("Input password: %s", password));
+        return sendKeys(passwordField, password);
+    }
+
+    public boolean clickLogin() {
+        log.info("Click on login button");
+        return clickElement(loginButton);
     }
 }
