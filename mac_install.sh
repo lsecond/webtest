@@ -15,8 +15,6 @@ casks=(
 
 recipes=(
 geckodriver
-chromedriver
-phantomjs
 maven
 )
 
@@ -111,6 +109,8 @@ function brew_install_recipes() {
       brew install $recipe
     done
   fi
+  brew tap homebrew/cask
+  brew cask install chromedriver
 }
 
 ####### CASKROOM
@@ -134,11 +134,10 @@ if (( ${#casks[@]} > 0 )); then
   for cask in "${casks[@]}"; do
     brew cask install $cask
   done
-  brew cask cleanup
+  brew cleanup
 fi
 
-# Work around colorPicker symlink issue.
-# https://github.com/caskroom/homebrew-cask/issues/7004
+
 cps=()
 for f in ~/Library/ColorPickers/*.colorPicker; do
   [[ -L "$f" ]] && cps=("${cps[@]}" "$f")
