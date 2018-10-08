@@ -24,12 +24,11 @@ public class LoginPageTest extends AbstractTest {
         Assert.assertTrue("Unable to input email for reset password", getWeb().LoginPage().inputForgotPasswordEmail("forgot" + VALID_USER.email));
         Assert.assertTrue("Unable to verify sign out successfully", getWeb().LoginPage().clickResetPasswordButton());
         Assert.assertTrue("Unable to verify reset message displayed", getWeb().LoginPage().verifyResetMessageDisplay());
-
     }
 
     @Before
     public void beforeValidLoginTest(){
-        if(!getWeb().LoginPage().getUrl().contains("login")){
+        if(!getWeb().LoginPage().getUrl().contains("login") || getWeb().LoginPage().getUrl().contains("reset")){
             driver.get(loginUrl);
         }
     }

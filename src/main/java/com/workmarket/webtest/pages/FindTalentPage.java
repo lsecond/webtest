@@ -40,6 +40,11 @@ public class FindTalentPage extends AbstractPage{
         return Integer.parseInt(maxResultNumber.split(" ")[0]);
     }
 
+    /**
+     *
+     * @param searchText
+     * @return boolean true if every result include at least one match text.
+     */
     public boolean verifyAllResult(String searchText) {
         log.info(String.format("Verify every result includes at least one %s text in details",searchText));
         List<WebElement> searchResultCell = driver.findElements(By.xpath( "//div[@id='search_results']//div[@class ='profile-card--details']"));
@@ -49,17 +54,20 @@ public class FindTalentPage extends AbstractPage{
             return false;
         }
         if(size > getPageRecordLimit()){
-            searchResultCell.subList(50,size).clear();
+            searchResultCell.subList(getPageRecordLimit(),size).clear();
         }
         for(WebElement detail : searchResultCell){
             List<WebElement> children = detail.findElements(By.xpath(".//*"));
-            WebElement matchupElement = children.stream().filter(child -> child.getText()!= null &&
+            // will find all element under details and verify at least one of them has text include search string.
+            WebElement matchElement = children.stream().filter(child -> child.getText()!= null &&
                     !child.getText().isEmpty() &&
-                    child.getText().toLowerCase(Locale.CANADA).contains(searchText.toLowerCase())).findFirst().get();
-            log.info(String.format("find match text %s on a element %s ", matchupElement.getText(), matchupElement.getAttribute("class")));
-            if(matchupElement==null) {
-                log.severe(String.format(String.format("find one record has no text %s", searchText)));
+                    child.getText().toLowerCase(Locale.CANADA).contains(searchText.toLowerCase(Locale.CANADA))).findFirst().orElse(null);
+            if(matchElement==null) {
+                log.severe(String.format(String.format("find one record has no text %s, the worker information: %s",
+                        searchText,detail.findElement(By.tagName("h2")).getText())));
                 return false;
+            } else {
+                log.info(String.format("find match text %s on a element %s ", matchElement.getText(), matchElement.getAttribute("class")));
             }
         }
         return true;

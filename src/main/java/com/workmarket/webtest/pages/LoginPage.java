@@ -27,7 +27,6 @@ public class LoginPage extends AbstractPage{
     @FindBy(id = "reset-password")
     private WebElement resetPassword;
 
-
     @FindBy(id = "email")
     private WebElement forgotPasswordEmail;
 
@@ -56,7 +55,7 @@ public class LoginPage extends AbstractPage{
 
     public boolean clickResetPassword() {
         log.info("Click on reset password");
-        return clickElement(resetPassword,10);
+        return clickElement(resetPassword,TIMEOUT_FIVE_SECONDS);
     }
 
     public boolean verifyResetMessageDisplay() {
@@ -79,13 +78,17 @@ public class LoginPage extends AbstractPage{
         return getElementText(loginMessage).contains("Invalid user name or password");
     }
 
+    /**
+     * Need to switch to another iframe then can verify Recaptcha element.
+     * @return
+     */
     public boolean verifyNotRobotTextDisplay() {
         log.info("Verify 'I am not a robot' text display");
         List<WebElement> frames = driver.findElements(By.tagName("iframe"));
-        String winHanaleBefore = driver.getWindowHandle();
+        String winHandleBefore = driver.getWindowHandle();
         driver.switchTo().frame(0);
         isElementDisplayed(notRobotRecaptcha);
-        driver.switchTo().window(winHanaleBefore);
+        driver.switchTo().window(winHandleBefore);
         return true;
     }
 

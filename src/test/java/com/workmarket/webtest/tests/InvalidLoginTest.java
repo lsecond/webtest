@@ -28,12 +28,10 @@ public class InvalidLoginTest extends AbstractTest {
         }
     };
 
-
     private UserEnum userEnum;
 
     public InvalidLoginTest(UserEnum userEnum) {
         this.userEnum = userEnum;
-
     }
 
     @Parameterized.Parameters(name = "{index}:{0}")

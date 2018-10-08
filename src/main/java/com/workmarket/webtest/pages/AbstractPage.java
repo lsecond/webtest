@@ -128,14 +128,19 @@ public class AbstractPage {
         return found;
     }
 
+    /**
+     * Find a list by input By locator and then waiting for it load completely.
+     * @param by
+     * @return
+     */
     public static ExpectedCondition<Boolean> loadListFinish(By by) {
         int size = driver.findElements(by).size();
         return new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver driver) {
-               int newSize =  driver.findElements(by).size();
-               sleep(2000);
-               if(newSize == size){
+                sleep(2000);
+                int newSize =  driver.findElements(by).size();
+                if(newSize == size){
                    log.info("List load finished");
                    return true;
                } else {
@@ -171,8 +176,4 @@ public class AbstractPage {
         }
         return gotElementText;
     }
-
-
-
-
 }

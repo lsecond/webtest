@@ -11,6 +11,8 @@ import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import static com.workmarket.webtest.pages.AbstractPage.TIMEOUT_FIVE_SECONDS;
+
 public abstract class AbstractTest {
 
     public enum UserEnum {
@@ -49,7 +51,7 @@ public abstract class AbstractTest {
             System.setProperty("webdriver.chrome.driver", "C:\\tools\\selenium\\chromedriver.exe");
         }
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIMEOUT_FIVE_SECONDS, TimeUnit.SECONDS);
         AbstractTest.web = new WorkMarket(driver);
         driver.get(loginUrl);
     }
@@ -57,7 +59,7 @@ public abstract class AbstractTest {
     @AfterClass
     public static void afterClassAbstractTests() {
         if (driver != null) {
-            System.out.println("Close driver");
+            log.info("Close driver");
             driver.close();
             driver.quit();
         }

@@ -16,8 +16,8 @@ public class MainPageSearchTest extends AbstractTest{
     @Test
     public void searchForTalent() {
         Assert.assertTrue("Unable to click on 'Find Talent' button",  getWeb().MainPage().clickFindTalent());
-        Assert.assertTrue(String.format("Unable to input search text %s", searchText),  getWeb().FindTalentPage().inputSearchText(searchText));
+        Assert.assertTrue(String.format("Unable to input search text '%s'", searchText),  getWeb().FindTalentPage().inputSearchText(searchText));
         Assert.assertTrue(String.format("Unable to load all result"),  getWeb().FindTalentPage().waitForSearchResultLoadCompletely());
-        Assert.assertTrue(String.format("Find result has no text %s", searchText),   getWeb().FindTalentPage().verifyAllResult(searchText));
+        Assert.assertTrue(String.format("Find result has no text '%s'", searchText),   getWeb().FindTalentPage().verifyAllResult(searchText));
     }
 }
