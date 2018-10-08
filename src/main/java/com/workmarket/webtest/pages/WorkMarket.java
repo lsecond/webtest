@@ -15,4 +15,6 @@ public class WorkMarket {
     public MainPage MainPage() {return new MainPage(driver);}
 
     public LoginPage LoginPage() {return new LoginPage(driver);}
+
+    public IndexPage IndexPage() {return new IndexPage(driver);}
 }

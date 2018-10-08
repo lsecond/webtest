@@ -1,4 +1,4 @@
-package com.workmarket.webtest;
+package com.workmarket.webtest.tests;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -10,13 +10,14 @@ public class MainPageSearchTest extends AbstractTest{
 
     @BeforeClass
     public static void beforeClassMainPageSearch(){
-        PublicAction.login(USER_EMAIL, USER_PASSWORD);
+        PublicAction.login(UserEnum.VALID_USER);
     }
 
     @Test
     public void searchForTalent() {
         Assert.assertTrue("Unable to click on 'Find Talent' button",  getWeb().MainPage().clickFindTalent());
         Assert.assertTrue(String.format("Unable to input search text %s", searchText),  getWeb().FindTalentPage().inputSearchText(searchText));
+        Assert.assertTrue(String.format("Unable to load all result"),  getWeb().FindTalentPage().waitForSearchResultLoadCompletely());
         Assert.assertTrue(String.format("Find result has no text %s", searchText),   getWeb().FindTalentPage().verifyAllResult(searchText));
     }
 }
