@@ -8,13 +8,12 @@ kegs=(
 
 # Homebrew casks
 casks=(
-  firefox
   google-chrome
   java
 )
 
 recipes=(
-geckodriver
+gradle
 maven
 )
 
@@ -154,3 +153,4 @@ if (( ${#cps[@]} > 0 )); then
 fi
 
 brew_install_recipes
+brew install gradle

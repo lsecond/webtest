@@ -22,7 +22,7 @@ public class LoginPageTest extends AbstractTest {
     public void forgotPasswordTest() {
         Assert.assertTrue("Unable to click on 'forgot my password'", getWeb().LoginPage().clickResetPassword());
         Assert.assertTrue("Unable to input email for reset password", getWeb().LoginPage().inputForgotPasswordEmail("forgot" + VALID_USER.email));
-        Assert.assertTrue("Unable to verify sign out successfully", getWeb().LoginPage().clickResetPasswordButton());
+        Assert.assertTrue("Unable to click rest password button", getWeb().LoginPage().clickResetPasswordButton());
         Assert.assertTrue("Unable to verify reset message displayed", getWeb().LoginPage().verifyResetMessageDisplay());
     }
 

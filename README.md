@@ -1,87 +1,101 @@
-# Project Title
+# iOSTheScoreTests
 
-One Paragraph of project description goes here
+This repo houses functional tests for a website.
+The tests are, UI-driven, automated tests using gradle, jUnit, selenium, java.
 
-## Getting Started
+- [Getting the code](#getting-the-code)
+- [Compiling](#compiling)
+- [Running Tests](#running-tests)
+- [Test Results](#test-results)
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+# Prerequisites
+Mac OS 10.0x or up
 
-### Prerequisites
+- Git
 
-What things you need to install the software and how to install them
+Windows 7 or up
+- Git
+- PowerShell 3.0 or up
+- Microsoft .NET Framework 4 or up
 
-```
-Give examples
-```
 
-### Installing
+# Getting the code
 
-A step by step series of examples that tell you how to get a development env running
+Clone this repo using a graphical git client or with the command line:
 
-Say what the step will be
+- All test class in:
+    src/test/java/com/workmarket/webtest/tests
+- All page source in:
+    src/main/java/com/workmarket/webtest/pages
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
 
 ```
-Give an example
+Mac OS:
+cd ~
+git clone https://github.com/lsecond/webtest.git
+
+Windows:
+cd %HOMEPATH%
+git clone https://github.com/lsecond/webtest.git
 ```
 
-### And coding style tests
+Running the install script should install all platform-level dependencies.
 
-Explain what these tests test and why
+Mac OS:
+```
+cd "~/webtest"
+./mac_install.sh
+```
+Windows:
+```
+cd "%HOMEPATH%/webtest"
+windows_install.bat
+```
+
+If you already have the test environment setup and do not want to run the setup script, you just need to
+change Chrome driver setup in AbstractTest.java in com.workmarket.webtest.tests.
+
+from line 49:
+
+<pre><code>
+if(System.getProperty("os.name").contains("Mac")){
+            System.setProperty("webdriver.chrome.driver", <span style="background-color: #FFFF00">"/usr/local/bin/chromedriver"</span>);
+            // replace with your chrome driver path
+        } else {
+            System.setProperty("webdriver.chrome.driver", <span style="background-color: #FFFF00">"C:\\tools\\selenium\\chromedriver.exe"</span>);
+            // replace with your chrome driver path
+        }
+</code></pre>
+# Compiling
+You can use an IDE to work with the code, for example [IntelliJ](https://www.jetbrains.com/idea/).
+
+Or, use gradle command line
 
 ```
-Give an example
+gradle clean assemble
 ```
 
-## Deployment
+This compiles the code.
 
-Add additional notes about how to deploy this on a live system
+# Running Tests
+1. Run all tests 
 
-## Built With
+    ```
+    gradle clean test
+    ```
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
-## Contributing
+2. Run a test class using IntelliJ's run configurations or using:
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+    ```
+    gradle clean test --tests *LoginPageTest
+    ```
+    
+The test will launch the chrome and run certain test. 
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+# Test Results
+If you ran the tests using IntelliJ the results will be visible through the UI.
+If you ran them using gradle you can check the report:
+```
+  webtest/build/reports/tests/test/index.html
+```

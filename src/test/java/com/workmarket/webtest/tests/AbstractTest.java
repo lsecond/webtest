@@ -5,6 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,7 +51,10 @@ public abstract class AbstractTest {
         } else {
             System.setProperty("webdriver.chrome.driver", "C:\\tools\\selenium\\chromedriver.exe");
         }
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        driver = new ChromeDriver(options);
+        driver.manage().window().fullscreen();// for mac fullscreen.
         driver.manage().timeouts().implicitlyWait(TIMEOUT_FIVE_SECONDS, TimeUnit.SECONDS);
         AbstractTest.web = new WorkMarket(driver);
         driver.get(loginUrl);

@@ -139,6 +139,8 @@ public class AbstractPage {
             @Override
             public Boolean apply(WebDriver driver) {
                 sleep(2000);
+                int size = driver.findElements(by).size();
+                sleep(2000);
                 int newSize =  driver.findElements(by).size();
                 if(newSize == size){
                    log.info("List load finished");

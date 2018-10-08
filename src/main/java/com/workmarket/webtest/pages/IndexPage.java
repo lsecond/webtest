@@ -15,6 +15,6 @@ public class IndexPage extends AbstractPage{
 
     public boolean verifyMainNavDisplayed() {
         log.info("Verify main navigate bar displayed");
-        return isElementDisplayed(mainNavigateBar);
+        return waitForElementToExist(mainNavigateBar,TIMEOUT_FIVE_SECONDS * 2);
     }
 }
