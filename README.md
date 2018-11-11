@@ -1,4 +1,4 @@
-# iOSTheScoreTests
+# WebTests
 
 This repo houses functional tests for a website.
 The tests are, UI-driven, automated tests using gradle, jUnit, selenium, java.
